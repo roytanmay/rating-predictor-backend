@@ -45,14 +45,14 @@ export const getUser = async (req, res) => {
         return new Promise((resolve) => {
           setTimeout(async () => {
             const url = `https://lccn.lbao.site/api/v1/contest-records/user?contest_name=${contest}&username=${name}&archived=false`;
-            const response = await fetch(url);
+            const response = await axios.get(url);
 
-            if (response.ok) {
-              const data = await response.json();
-              if (data && data[0]) {
-                userlist.push(data[0]);
-                // console.log(data[0].username);
-              }
+            // if (response.ok) {
+            const data = response.data;
+            if (data && data[0]) {
+              userlist.push(data[0]);
+              // console.log(data[0].username);
+              // }
             }
 
             resolve(); // Resolve the Promise after the fetch operation
