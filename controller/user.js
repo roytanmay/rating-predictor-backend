@@ -49,7 +49,7 @@ export const getUser = async (req, res) => {
 
             // if (response.ok) {
             const data = response.data;
-            if (data && data[0]) {
+            if (data) {
               userlist.push(data[0]);
               // console.log(data[0].username);
               // }
