@@ -18,12 +18,12 @@ app.use(cors());
 app.get("/working", async (req, res) => {
   try {
     const response = await fetch(
-      "https://lccn.lbao.site/api/v1/contests/?skip=0&limit=10"
+      "https://jsonmock.hackerrank.com/api/football_matches?year=2011"
     );
     const data = await response.json();
     res.status(200).json(data);
   } catch (error) {
-    res.status(404).json({ message: "Error!!" });
+    res.status(404).json(error);
   }
 });
 app.use("/", homeRoutes);
