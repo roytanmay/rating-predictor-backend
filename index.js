@@ -26,10 +26,11 @@ app.get("/working", async (req, res) => {
     res.status(404).json({ message: "Error!!" });
   }
 });
-// app.use("/", homeRoutes);
+app.use("/", homeRoutes);
 app.use("/user", userRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
+  console.log(port);
   console.log("servering running on port 5000");
 });
