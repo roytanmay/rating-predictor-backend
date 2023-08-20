@@ -82,8 +82,8 @@ export const addFriend = async (req, res) => {
   const url = `https://leetcode-api.cyclic.app/${username}`;
 
   try {
-    const response = await fetch(url);
-    const data = await response.json();
+    const response = await axios.get(url);
+    const data = await response.data;
 
     if (data.status === "success") {
       res.status(200).json({ message: "Valid user" });
