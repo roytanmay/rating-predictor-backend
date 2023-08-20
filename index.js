@@ -21,9 +21,9 @@ app.get("/working", async (req, res) => {
       "https://jsonmock.hackerrank.com/api/football_matches?year=2011"
     );
     const data = await response.json();
-    res.status(200).json(data);
+    res.status(200).json(`data: ${data}`);
   } catch (error) {
-    res.status(404).json(error);
+    res.status(404).json(`error: ${error}`);
   }
 });
 app.use("/", homeRoutes);
