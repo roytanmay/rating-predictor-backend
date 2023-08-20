@@ -18,7 +18,7 @@ app.use(cors());
 app.get("/working", (req, res) => {
   res.send("working");
 });
-app.use("/", homeRoutes);
+app.use("/contest", homeRoutes);
 app.use("/user", userRoutes);
 
 const port = process.env.PORT || 5000;
