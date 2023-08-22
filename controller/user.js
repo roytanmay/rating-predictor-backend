@@ -50,9 +50,10 @@ export const getUser = async (req, res) => {
             // if (response.ok) {
             const data = response.data;
             if (data) {
-              userlist.push(data[0]);
-              // console.log(data[0].username);
-              // }
+              if (data[0]) {
+                userlist.push(data[0]);
+              } else {
+              }
             }
 
             resolve(); // Resolve the Promise after the fetch operation
@@ -65,6 +66,7 @@ export const getUser = async (req, res) => {
       // Execute all the fetch operations with timeouts
       await Promise.all(fetchPromises);
 
+      userlist.push(null);
       return userlist; // Return the collected userlist
     };
 
