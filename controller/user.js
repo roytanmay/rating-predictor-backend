@@ -1,37 +1,6 @@
 import { response } from "express";
 import axios from "axios";
 
-// export const getUser = async (req, res) => {
-//   const { contest, username } = req.body;
-//   const userlist = [];
-
-//   try {
-//     const fetchPromises = async (username) => {
-//       let i = 0;
-//     const len  = username.length;
-//     console.log(username);
-//     //i=len-1;
-//     while (username[i] !== undefined) {
-//       const url = `https://lccn.lbao.site/api/v1/contest-records/user?contest_name=${contest}&username=${username[i]}&archived=false`;
-//       const response = await fetch(url);
-//       const data = await response.json();
-//         console.log(data);
-//       if (data && data[0]) {
-//         userlist.push(data[0]);
-//       }
-//       i++;
-//     }
-
-//     };
-
-//     await Promise.all(fetchPromises(username));
-//      res.status(200).json(userlist);
-//   } catch (error) {
-
-//     res.status(200).json({ message: "Server error ..." });
-//   }
-// };
-
 export const getUser = async (req, res) => {
   const { contest, username } = req.body;
 
@@ -41,7 +10,7 @@ export const getUser = async (req, res) => {
       let count = 0;
 
       // Creating a Promise for each fetch operation
-      const fetchPromises = username.map((name) => {
+      const fetchPromises = username.map((name, index) => {
         return new Promise((resolve) => {
           setTimeout(async () => {
             const url = `https://lccn.lbao.site/api/v1/contest-records/user?contest_name=${contest}&username=${name}&archived=false`;
@@ -52,21 +21,25 @@ export const getUser = async (req, res) => {
             if (data) {
               if (data[0]) {
                 userlist.push(data[0]);
-              } else {
+              } else if (index === username.length - 1) {
+                userlist.push(data[0]);
               }
             }
 
             resolve(); // Resolve the Promise after the fetch operation
           }, count);
 
-          count += 1000; // Increase the delay for the next request
+          count += 1500; // Increase the delay for the next request
         });
       });
 
       // Execute all the fetch operations with timeouts
       await Promise.all(fetchPromises);
 
-      userlist.push(null);
+      // userlist.push(null);
+      // if(userlist.length === 0) {
+      //   userlist.push(null);
+      // }
       return userlist; // Return the collected userlist
     };
 
