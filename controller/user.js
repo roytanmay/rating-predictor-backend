@@ -59,13 +59,12 @@ export const addFriend = async (req, res) => {
   try {
     const response = await axios.get(url);
     const data = await response.data;
-
     if (data.status === "success") {
       res.status(200).json({ message: "Valid user" });
     } else {
-      res.status(400).json({ message: "User not valid" });
+      res.status(404).json({ message: "User not valid" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Enter valid Username / Server error" });
   }
 };
