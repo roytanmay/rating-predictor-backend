@@ -54,7 +54,7 @@ export const getUser = async (req, res) => {
 
 export const addFriend = async (req, res) => {
   const { username } = req.body;
-  const url = `https://leetcode-api.cyclic.app/${username}`;
+  const url = `https://leetcode-stats-api.herokuapp.com/${username}`;
 
   try {
     const response = await axios.get(url);
